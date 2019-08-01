@@ -1,0 +1,29 @@
+{
+	"name"            : "@11ways/color",
+	"description"     : "Color classes",
+	"author"          : "Jelle De Loecker <jelle@elevenways.be>",
+	"version"         : "0.1.0-alpha",
+	"repository"      : "11ways/color",
+	"license"         : "MIT",
+	"keywords"        : ["color"],
+	"contributors"    : [],
+	"main"            : "lib/init.js",
+	"dependencies"    : {
+		"protoblast"  : "~0.7.0"
+	},
+	"devDependencies" : {
+		"codecov"    : "~3.0.4",
+		"nyc"        : "^12.0.2",
+		"mocha"      : "~5.2.0"
+	},
+	"scripts": {
+		"test"            : "node_modules/.bin/mocha --exit --reporter spec --bail --timeout 5000 --file test/00-init.js",
+		"appveyor"        : "node_modules/.bin/mocha --exit --reporter spec --bail --timeout 20000 --file test/00-init.js",
+		"coverage"        : "node_modules/.bin/nyc --reporter=text --reporter=lcov mocha --exit --timeout 20000 --bail --file test/00-init.js",
+		"report-coverage" : "cat ./coverage/lcov.info | codecov"
+	},
+	"engines": {
+		"node": ">=10.16"
+	},
+	"private": true
+}
