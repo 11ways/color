@@ -5,9 +5,11 @@ describe('Color', function() {
 
 	describe('Parsing RGB values', function() {
 		var tests = [
-			['#FF0000', 'hsla(0,100,50,1)', [255, 0, 0, 1], [0, 100, 50, 1]],
-			['#ff0000', 'hsla(0,100,50,1)', [255, 0, 0, 1], [0, 100, 50, 1]],
-			['rgba(66, 189, 117, 0.87)', 'hsla(145,48.2,50,0.87)']
+			['#FF0000', 'hsla(0, 100%, 50%, 1)', [255, 0, 0, 1], [0, 100, 50, 1]],
+			['#ff0000', 'hsla(0, 100%, 50%, 1)', [255, 0, 0, 1], [0, 100, 50, 1]],
+			['rgba(66, 189, 117, 0.87)', 'hsla(145, 48.2%, 50%, 0.87)'],
+			[{r: 255, g: 0, b: 0}, 'hsla(0, 100%, 50%, 1)', [255, 0, 0, 1], [0, 100, 50, 1]],
+			[{r: 66, g: 189, b: 117, a: 0.87}, 'hsla(145, 48.2%, 50%, 0.87)']
 		];
 
 		createParseTests(tests);
@@ -15,8 +17,9 @@ describe('Color', function() {
 
 	describe('Parsing HSL values', function() {
 		var tests = [
-			['hsl(3.14rad,100%,50%)', 'hsla(180,100,50,1)'],
-			['hsl(145, 48%, 50%)', 'hsla(145,48,50,1)']
+			['hsl(3.14rad,100%,50%)', 'hsla(180, 100%, 50%, 1)'],
+			['hsl(145, 48%, 50%)', 'hsla(145, 48%, 50%, 1)'],
+			[{h: 145, s: 48, l: 50}, 'hsla(145, 48%, 50%, 1)']
 		];
 
 		createParseTests(tests);
@@ -28,7 +31,7 @@ describe('Color', function() {
 			var color = new Color('hsl(100, 50, 60)');
 			color.lighten(0.5);
 
-			assert.strictEqual(color.toString(), 'hsla(100,50,90,1)');
+			assert.strictEqual(color.toString(), 'hsla(100, 50%, 90%, 1)');
 
 			assert.deepStrictEqual(color.rgba, [225, 242, 217, 1]);
 		});
@@ -54,7 +57,7 @@ function createParseTests(tests) {
 
 	for (let i = 0; i < tests.length; i++) {
 		let test = tests[i],
-		    title = 'should parse ' + test[0];
+		    title = 'should parse ' + JSON.stringify(test[0]);
 
 		it(title, function() {
 			let instance = new Color(test[0]);
