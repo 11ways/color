@@ -41,7 +41,7 @@
 </div>
 <br>
 <div align="center">
-  👷🏼 Personal node.js package skeleton.
+  🌈 Color type for JavaScript
 </div>
 <div align="center">
   <sub>
@@ -67,12 +67,56 @@ var Color = require('@11ways/color');
 ```
 
 ## API
-<a name="hello"></a>
 
-### hello() ⇒ `string`
-A method that makes you happy.
+### Constructors
 
-**Returns**: <code>string</code> - A string that greets the world.  
+```js
+var yellow = new Color('yellow');
+var yellow = new Color('#ffff00');
+var yellow = new Color('hsla(60, 100%, 50%, 1)');
+var yellow = new Color({r: 255, g: 255, b: 0});
+```
+
+### #luminosity ⇒ `number`
+
+The WCAG luminosity of the color.
+This can also be used as a setter, though it will only attempt to approximate it.
+
+### #whiten(ratio) ⇒ `this`
+
+Using the HWB model, 
+whiten the current color by adding the current whiteness * the given ratio.
+
+If the whiteness is currently 0, the ratio is added as-is.
+
+### #blacken(ratio) ⇒ `this`
+
+Using the HWB model, 
+blacken the current color by adding the current blakcness * the given ratio.
+
+If the blackness is currently 0, the ratio is added as-is.
+
+### #lighten(ratio) ⇒ `this`
+
+Using the HSL model, 
+lighten the current color by adding the current lightness * the given ratio.
+
+If the lightness is currently 0, the ratio is added as-is.
+
+### #darken(ratio) ⇒ `this`
+
+Using the HSL model, 
+darken the current color by subtracting the current lightness * the given ratio.
+
+If the lightness is currently 0, nothing is changed.
+
+### #contrast(other_color) ⇒ `number`
+
+Calculate the contrast between this and the other color.
+
+### #makeReadable(other_color, target_contrast = 7.1, allow_changing_other_color = true) ⇒ `boolean`
+
+Make this readable on the given color.
 
 ## Contributing
 Contributions are REALLY welcome.

@@ -9,7 +9,9 @@ describe('Color', function() {
 			['#ff0000', 'hsla(0, 100%, 50%, 1)', [255, 0, 0, 1], [0, 100, 50, 1]],
 			['rgba(66, 189, 117, 0.87)', 'hsla(145, 48.2%, 50%, 0.87)'],
 			[{r: 255, g: 0, b: 0}, 'hsla(0, 100%, 50%, 1)', [255, 0, 0, 1], [0, 100, 50, 1]],
-			[{r: 66, g: 189, b: 117, a: 0.87}, 'hsla(145, 48.2%, 50%, 0.87)']
+			[{r: 66, g: 189, b: 117, a: 0.87}, 'hsla(145, 48.2%, 50%, 0.87)'],
+			[{r: 255, g: 255, b: 0}, 'hsla(60, 100%, 50%, 1)'],
+			['yellow', 'hsla(60, 100%, 50%, 1)']
 		];
 
 		createParseTests(tests);
@@ -49,6 +51,23 @@ describe('Color', function() {
 			assert.strictEqual(grey.level(black), 'AA');
 			assert.strictEqual(black.level(red), 'AA');
 			assert.strictEqual(white.level(white), '');
+		});
+	});
+
+	describe('#makeReadable(other_color)', function() {
+		it('should make one color readable on the other colour', function() {
+
+			var yellow = new Color('yellow');
+
+			assert.strictEqual(yellow.toString('hex'), '#FFFF00');
+
+			let contrast = yellow.contrast('white').toFixed(2);
+
+			assert.strictEqual(contrast, '1.07');
+
+			yellow.makeReadable('white');
+
+			assert.strictEqual(yellow.contrast('white') >= 7, true);
 		});
 	});
 });
