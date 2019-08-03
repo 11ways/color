@@ -39,6 +39,56 @@ describe('Color', function() {
 		});
 	});
 
+	describe('#darken()', function() {
+		it('should darken the color', function() {
+
+			var color = new Color('hsl(100, 50, 60)');
+			color.darken(0.5);
+
+			assert.strictEqual(color.toString(), 'hsla(100, 50%, 30%, 1)');
+		});
+	});
+
+	describe('#whiten()', function() {
+		it('should whiten the color', function() {
+
+			var color = new Color('hsl(100, 50, 60)');
+			color.whiten(0.5);
+
+			assert.strictEqual(color.toString(), 'hsla(100, 33.3%, 70%, 1)');
+		});
+	});
+
+	describe('#blacken()', function() {
+		it('should blacken the color', function() {
+
+			var color = new Color('hsl(100, 50, 60)');
+			color.blacken(0.5);
+
+			assert.strictEqual(color.toString(), 'hsla(100, 33.3%, 55%, 1)');
+		});
+	});
+
+	describe('#saturate()', function() {
+		it('should saturate the color', function() {
+
+			var color = new Color('#88CC66');
+			color.saturate(0.5);
+
+			assert.strictEqual(color.toString('hex'), '#7FE64C');
+		});
+	});
+
+	describe('#desaturate()', function() {
+		it('should desaturate the color', function() {
+
+			var color = new Color('#88CC66');
+			color.desaturate(0.5);
+
+			assert.strictEqual(color.toString('hex'), '#91B380');
+		});
+	});
+
 	describe('#level(color)', function() {
 		it('should return the level', function() {
 
